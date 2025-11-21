@@ -1,4 +1,4 @@
-# 🧠 Deepfake Detection Demo (LMS + Chrome Extension)
+ # 🧠 Deepfake Detection Demo (LMS + Chrome Extension)
 
 > 건양대학교 스마트보안학과 | 2025 학술제 시연용
 >
@@ -64,8 +64,8 @@ python -m http.server 8080
 
 🔹 (2) 확장 프로그램 로드
 
-extension 폴더 선택
-(📂 manifest.json 파일이 포함된 폴더)
+- extension 폴더 선택
+    (📂 manifest.json 파일이 포함된 폴더)
 
 🔹 (3) 정상 등록 확인
 
