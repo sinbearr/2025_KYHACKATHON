@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Deepfake Guard Demo</title>
+  <style>
+    body { font-family: system-ui, sans-serif; background: #111; color: #eee; text-align: center; padding: 40px; }
+    h1 { color: #58AFFF; margin-bottom: 10px; }
+    video { width: 640px; border: 3px solid #58AFFF; border-radius: 12px; box-shadow: 0 0 20px rgba(88,175,255,0.3); }
+    p { color: #ccc; }
+  </style>
+</head>
+<body>
+  <h1>🎬 Deepfake Guard Demo (Batch)</h1>
+  <p>아래 영상을 재생하면 확장 프로그램이 여러 장을 모아서 배치 추론합니다.</p>
+  <video id="demoVideo" controls>
+    <source src="demo.mp4" type="video/mp4">
+    브라우저가 video 태그를 지원하지 않습니다.
+  </video>
+  <p style="margin-top: 20px;">확장프로그램 설치 후 이 페이지를 새로고침하세요.</p>
+</body>
+</html>

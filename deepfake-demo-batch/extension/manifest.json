@@ -1,0 +1,42 @@
+{
+  "manifest_version": 3,
+  "name": "Deepfake Guard (Demo)",
+  "version": "0.2.0",
+  "description": "재생 중인 영상에서 딥페이크 의심 시 팝업 경고 (배치 추론 지원)",
+  "permissions": [
+    "notifications",
+    "storage",
+    "activeTab"
+  ],
+  "host_permissions": [
+    "http://127.0.0.1:8000/*",
+    "http://localhost:8000/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Deepfake Guard"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "css": [
+        "overlay.css"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "icons": {
+    "16": "icons/16.png",
+    "32": "icons/32.png",
+    "48": "icons/48.png",
+    "128": "icons/128.png"
+  }
+}

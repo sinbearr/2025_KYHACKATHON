@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <title>자유게시판 > 게시글</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="title">개인정보 영향평가
+    </div>
+    <div class="right">
+      <span class="period">학습기간: <strong>2025-11-13 ~ 2025-11-13</strong></span>
+      <button class="close-btn" aria-label="닫기">✕</button>
+    </div>
+  </header>
+
+  <div class="container">
+    <aside class="sidebar">
+      <div class="sidebar-panel">
+        <!-- 1번: 비활성(흰색). 로컬 상태를 알약으로 렌더링 -->
+        <a class="lesson-card" href="index.html">
+          <div class="lesson-card__grid">
+            <div class="circle">1</div>
+            <div class="type">[동영상]</div>
+            <div class="title">개인정보 영향평가</div>
+            <div id="status1" class="status">상태</div>
+          </div>
+        </a>
+
+        <!-- 2번: 활성(브라운) -->
+        <a class="lesson-card is-active" href="post.html">
+          <div class="lesson-card__grid">
+            <div class="circle">2</div>
+            <div class="type">[자료]</div>
+            <div class="title">자유게시판</div>
+            <div class="status status--pending">미확인</div>
+          </div>
+        </a>
+      </div>
+    </aside>
+
+    <section class="content">
+      <div class="board">
+        <div class="board__breadcrumb">
+          <span>자유게시판</span><span class="sep"> &gt; </span><strong>게시글</strong>
+        </div>
+
+        <div class="board__card">
+          <div class="board__titlebar"><h1 class="board__title">개인정보보호법 설문조사</h1></div>
+          <div class="board__meta">작성자 : 차건상(스마트보안학과) ｜ 등록일 : 2025-11-13 ｜ 조회수 : 15</div>
+
+          <div class="board__body">
+            개인정보보호법 관련 설문조사 참여 바랍니다.<br /><br />
+            아래 버튼을 눌러 설문에 참여해 주세요.
+          </div>
+
+          <div class="board__body" style="padding-bottom:24px;">
+            <button id="surveyBtn" class="board__comment-btn" style="width:auto;background:#0b5bd3;color:#fff;">
+              설문 참여하기 →
+            </button>
+          </div>
+
+          <div class="board__comment">
+            <label class="board__comment-label">* 댓글</label>
+            <div class="board__comment-row">
+              <textarea class="board__comment-input" placeholder="댓글을 입력하세요."></textarea>
+              <button class="board__comment-btn">등록</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    /* 설문 링크 (이 줄만 원하는 링크로 교체) */
+    const SURVEY_URL = "survey.html";
+    document.getElementById("surveyBtn").addEventListener("click", () => {
+      window.location.href = SURVEY_URL; // 새 창: window.open(SURVEY_URL,"_blank");
+    });
+
+    /* 1번(영상) 상태 알약 렌더링 */
+    const STATUS_KEY = "lesson1Status";
+    const s = localStorage.getItem(STATUS_KEY) || "incomplete";
+    const statusEl = document.getElementById("status1");
+    statusEl.classList.remove("status--incomplete","status--complete","status--pending");
+    if (s === "complete"){
+      statusEl.textContent = "학습완료";
+      statusEl.classList.add("status--complete");
+    } else {
+      statusEl.textContent = "미완료";
+      statusEl.classList.add("status--incomplete");
+    }
+  </script>
+</body>
+</html>

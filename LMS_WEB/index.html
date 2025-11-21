@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <title>개인정보 영향평가</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="title">개인정보 영향평가</div>
+    <div class="right">
+      <span class="period">학습기간: <strong>2025-11-13 ~ 2025-11-13</strong></span>
+      <button class="close-btn" aria-label="닫기">✕</button>
+    </div>
+  </header>
+
+  <div class="container">
+    <aside class="sidebar">
+      <div class="sidebar-panel">
+        <!-- 1번: 활성(브라운) -->
+        <a class="lesson-card is-active" href="index.html">
+          <div class="lesson-card__grid">
+            <div class="circle">1</div>
+            <div class="type">[동영상]</div>
+            <div class="title">개인정보 영향평가</div>
+            <div id="status1" class="status status--incomplete">미완료</div>
+          </div>
+        </a>
+
+        <!-- 2번: 비활성(흰색) -->
+        <a class="lesson-card" href="post.html">
+          <div class="lesson-card__grid">
+            <div class="circle">2</div>
+            <div class="type">[자료]</div>
+            <div class="title">자유게시판</div>
+            <div class="status status--pending">미확인</div>
+          </div>
+        </a>
+      </div>
+    </aside>
+
+    <section class="content">
+      <div class="video-frame">
+        <div class="time-display">학습시간 : <span id="timer">00:00:00</span></div>
+
+        <video id="videoPlayer" class="video-player" controls>
+          <source src="deepfake_cha_demo.mp4" type="video/mp4" />
+        </video>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    /* ===== 학습시간: 재생 중에만 증가 ===== */
+    let seconds = 0, timerInterval = null;
+    const timerEl = document.getElementById("timer");
+    const video = document.getElementById("videoPlayer");
+    function renderTime(sec){
+      const h = String(Math.floor(sec/3600)).padStart(2,'0');
+      const m = String(Math.floor((sec%3600)/60)).padStart(2,'0');
+      const s = String(sec%60).padStart(2,'0');
+      timerEl.textContent = `${h}:${m}:${s}`;
+    }
+    function tick(){ seconds++; renderTime(seconds); }
+
+    video.addEventListener("play", () => {
+      if (!timerInterval) timerInterval = setInterval(tick, 1000);
+      setLessonStatus("incomplete");   // 재생 중엔 미완료
+    });
+    video.addEventListener("pause", () => { clearInterval(timerInterval); timerInterval = null; });
+    video.addEventListener("ended", () => {
+      clearInterval(timerInterval); timerInterval = null;
+      setLessonStatus("complete");     // 종료 시 학습완료
+    });
+
+    /* ===== 상태 저장/표시 ===== */
+    const STATUS_KEY = "lesson1Status"; // 'incomplete' | 'complete'
+    const status1El = document.getElementById("status1");
+
+    function paintStatus(status){
+      status1El.classList.remove("status--incomplete","status--complete");
+      if(status==="complete"){
+        status1El.textContent = "학습완료";
+        status1El.classList.add("status--complete");
+      }else{
+        status1El.textContent = "미완료";
+        status1El.classList.add("status--incomplete");
+      }
+    }
+    function setLessonStatus(status){
+      localStorage.setItem(STATUS_KEY, status);
+      paintStatus(status);
+    }
+
+    // 초기 상태 로드(없으면 미완료)
+    paintStatus(localStorage.getItem(STATUS_KEY) || "incomplete");
+  </script>
+</body>
+</html>

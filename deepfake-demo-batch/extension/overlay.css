@@ -1,0 +1,12 @@
+
+.dfg-badge {
+  font: 12px/1.6 system-ui, sans-serif;
+  padding: 6px 10px;
+  border-radius: 14px;
+  border: 1px solid rgba(0,0,0,.15);
+  backdrop-filter: blur(3px);
+}
+.dfg-modal { position: fixed; inset: 0; display:none; background: rgba(0,0,0,.35); z-index: 2147483647; }
+.dfg-modal-inner { position:absolute; top: 10%; left:50%; transform: translateX(-50%); background: #fff; padding: 16px 20px; border-radius: 12px; width: 320px; box-shadow: 0 10px 30px rgba(0,0,0,.2); }
+.dfg-modal h3 { margin: 0 0 8px }
+.dfg-modal button { margin-top: 10px; padding: 6px 10px; border-radius: 8px; }
