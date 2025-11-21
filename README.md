@@ -11,38 +11,45 @@
 ---
 
 ## 📁 프로젝트 구조
-
+```
 
 📦 KYHACKATHON_PROJECT_DF
-│
-├─ target_server/                # 공격 대상 서버 (CSRF 취약)
-│   ├─ target_server.py          # FastAPI 서버
-│   ├─ payment_success.html      # 결제 완료 페이지
-│   └─ ...
-│
-├─ LMS_WEB/                      # LMS 학습 사이트 (공격자 웹)
-│   ├─ index.html                # 동영상 시청
-│   ├─ post.html                 # 게시판
-│   ├─ survey.html               # CSRF 트리거 설문조사
-│   └─ styles.css
-│
-├─ deepfake-demo-batch/          # 딥페이크 탐지 데모 서버
-│   ├─ app.py                    # FastAPI 서버
-│   ├─ predict.py                # 추론 로직
-│   ├─ deepfake_detector_best.pth # 학습된 탐지 모델
-│   ├─ demo.mp4                  # 테스트 영상 (초상권 문제로 삭제함)
-│   ├─ index.html                # 테스트 페이지
-│   │
-│   └─ extension/                # 크롬 확장프로그램
-│       ├─ manifest.json
-│       ├─ background.js
-│       ├─ content.js
-│       ├─ overlay.css
-│       ├─ popup.html
-│       ├─ popup.js
-│       └─ icons/
-│
-└─ ...
+├─ deepfake-demo-batch # 딥페이크 탐지 데모
+│  ├─ app.py # FastAPI 서버
+│  ├─ deepfake_detector_best.pth # 딥페이크 탐지 모델
+│  ├─ extension # 크롬 확장프로그램
+│  │  ├─ background.js
+│  │  ├─ content.js
+│  │  ├─ icons
+│  │  │  ├─ 128.png
+│  │  │  ├─ 16.png
+│  │  │  ├─ 32.png
+│  │  │  └─ 48.png
+│  │  ├─ manifest.json
+│  │  ├─ overlay.css
+│  │  ├─ popup.html
+│  │  └─ popup.js
+│  ├─ index.html # 테스트 페이지
+│  ├─ predict.py # 추론 로직
+│  ├─ requirements.txt
+│  └─ __pycache__
+│     └─ predict.cpython-310.pyc
+├─ LMS_WEB # LMS 피싱사이트
+│  ├─ index.html # 동영상 시청 사이트
+│  ├─ post.html # 게시판
+│  ├─ styles.css 
+│  └─ survey.html # CSRF 트리거 설문조사
+├─ README.md
+├─ target_server # 공격 대상 서버
+│  ├─ payment_success.html # 결제 완료 페이지
+│  ├─ target_server.py # FastAPI 서버
+│  └─ __pycache__
+│     └─ target_server.cpython-310.pyc
+└─ __pycache__
+   ├─ app.cpython-310.pyc
+   └─ predict.cpython-310.pyc
+
+```
 
 
 ## 🚀 1. 서버 실행 방법
@@ -80,3 +87,41 @@ python -m http.server 8080
 - demo.mp4 재생 시 영상 좌측 상단에 분석 대기 배지 표시
 
 - 딥페이크 확률이 높을 경우 ⚠️ 경고 팝업이 뜨며 알림이 표시됨
+```
+KYHACKATHON_PROJECT_DF
+├─ deepfake-demo-batch
+│  ├─ app.py
+│  ├─ deepfake_detector_best.pth
+│  ├─ extension
+│  │  ├─ background.js
+│  │  ├─ content.js
+│  │  ├─ icons
+│  │  │  ├─ 128.png
+│  │  │  ├─ 16.png
+│  │  │  ├─ 32.png
+│  │  │  └─ 48.png
+│  │  ├─ manifest.json
+│  │  ├─ overlay.css
+│  │  ├─ popup.html
+│  │  └─ popup.js
+│  ├─ index.html
+│  ├─ predict.py
+│  ├─ requirements.txt
+│  └─ __pycache__
+│     └─ predict.cpython-310.pyc
+├─ LMS_WEB
+│  ├─ index.html
+│  ├─ post.html
+│  ├─ styles.css
+│  └─ survey.html
+├─ README.md
+├─ target_server
+│  ├─ payment_success.html
+│  ├─ target_server.py
+│  └─ __pycache__
+│     └─ target_server.cpython-310.pyc
+└─ __pycache__
+   ├─ app.cpython-310.pyc
+   └─ predict.cpython-310.pyc
+
+```
