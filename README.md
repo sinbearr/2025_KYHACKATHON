@@ -14,30 +14,36 @@
 
 
 📦 KYHACKATHON_PROJECT_DF
-┣ 📂 target_server/ # 공격 대상 서버 (CSRF 취약)
-┃ ┣ target_server.py # FastAPI 버전 (기본 실행용)
-┃ ┣ payment_success.html
-┃ ┗ ...
-┣ 📂 LMS_WEB/ # LMS 학습 사이트 (공격자 웹)
-┃ ┣ index.html # 동영상 시청
-┃ ┣ post.html # 게시판
-┃ ┣ survey.html # 설문조사(CSRF 공격 트리거)
-┃ ┗ styles.css
-┣ 📂 deepfake-demo-batch/ # 딥페이크 탐지 데모 서버
-┃ ┣ app.py # FastAPI 서버
-┃ ┣ predict.py # 모델 로딩 및 추론
-┃ ┣ deepfake_detector_best.pth # 학습된 탐지모델
-┃ ┣ demo.mp4 # 테스트 영상
-┃ ┣ index.html # 테스트용 페이지
-┃ ┗📂 extension/ # 크롬 확장프로그램
-┃  ┣ manifest.json
-┃  ┣ background.js
-┃  ┣ content.js
-┃  ┣ overlay.css
-┃  ┣ popup.html
-┃  ┣ popup.js
-┃  ┗ icons/
-┗...
+│
+├─ target_server/                # 공격 대상 서버 (CSRF 취약)
+│   ├─ target_server.py          # FastAPI 서버
+│   ├─ payment_success.html      # 결제 완료 페이지
+│   └─ ...
+│
+├─ LMS_WEB/                      # LMS 학습 사이트 (공격자 웹)
+│   ├─ index.html                # 동영상 시청
+│   ├─ post.html                 # 게시판
+│   ├─ survey.html               # CSRF 트리거 설문조사
+│   └─ styles.css
+│
+├─ deepfake-demo-batch/          # 딥페이크 탐지 데모 서버
+│   ├─ app.py                    # FastAPI 서버
+│   ├─ predict.py                # 추론 로직
+│   ├─ deepfake_detector_best.pth # 학습된 탐지 모델
+│   ├─ demo.mp4                  # 테스트 영상 (초상권 문제로 삭제함)
+│   ├─ index.html                # 테스트 페이지
+│   │
+│   └─ extension/                # 크롬 확장프로그램
+│       ├─ manifest.json
+│       ├─ background.js
+│       ├─ content.js
+│       ├─ overlay.css
+│       ├─ popup.html
+│       ├─ popup.js
+│       └─ icons/
+│
+└─ ...
+
 
 ## 🚀 1. 서버 실행 방법
 
